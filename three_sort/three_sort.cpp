@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <ctime>
 using namespace std;
-// сортировка пузырьком
+//сортировка пузырьком
 void Bubble(int arr[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -22,7 +22,7 @@ void Bubble(int arr[], int size)
         cout << arr[i] << " ";
     }
 }
-// сортировка выбором
+//сортировка выбором
 void Choice(int arr[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -44,7 +44,7 @@ void Choice(int arr[], int size)
         cout << arr[i] << " ";
     }
 }
-// сортировка вставками
+//сортировка вставками
 void Insert(int arr[], int size)
 {
     for (int i = 1; i < size; i++)
@@ -61,7 +61,22 @@ void Insert(int arr[], int size)
         cout << arr[i] << " ";
     }
 }
-// генерация случайного массива
+//быстрая сортировка (сортировка Хоара)
+void Partition() {
+
+}
+//сортировка слиянием 
+void Merge() {
+
+}
+//сортировка кучей (пирамидальная)
+void Heap() {
+
+}
+//сортировка Шелла (улучшенная сортировка вставками)
+void Shell(){
+}
+//генерация случайного массива
 void MassGen(int* arr, int size)
 {
     for (int i = 0; i < size; i++)
@@ -98,29 +113,36 @@ int main()
     switch (chose)
     {
     case 1:
-        cout << "Сортировка пузырьком:" << endl;
+        cout << "Сортировка пузырьком:\n";
         MassGen(arr, size);
-        cout << " - сгенерированный массив" << endl;
+        cout << " - сгенерированный массив\n";
         Bubble(arr, size);
-        cout << " - отсортированный массив" << endl;
+        cout << " - отсортированный массив\n";
         break;
 
     case 2:
-        cout << "Сортировка выбором:" << endl;
+        cout << "Сортировка выбором:\n";
         MassGen(arr, size);
-        cout << " - сгенерированный массив" << endl;
+        cout << " - сгенерированный массив\n";
         Choice(arr, size);
-        cout << " - отсортированный массив" << endl;
+        cout << " - отсортированный массив\n";
         break;
 
     case 3:
-        cout << "Сортировка вставками:" << endl;
+        cout << "Сортировка вставками:\n";
         MassGen(arr, size);
         cout << " - сгенерированный массив" << endl;
         cout << endl;
         Insert(arr, size);
         cout << " - отсортированный массив" << endl;
         break;
+
+    case 4: 
+        cout << "Быстрая сортировка: " << endl;
+        break;
+
     }
+    
+
 
 }
