@@ -276,6 +276,57 @@ void Heap(int arr[], int size) {
     }
 }
 
+//стурктура узла для бинарного дерева поиска
+struct TreeNode
+{
+    int key;
+    TreeNode* left, * right;
+
+    TreeNode(int item) {
+        key = item;
+        left = right = nullptr;
+    }
+};
+//функция для вставки нового элемента в бинарное дерево поиска
+TreeNode* insert(TreeNode* node, int key) {
+
+    //если дерево пустое, создается новый узел
+    if (node == nullptr)
+        return new TreeNode(key);
+
+    //вставляем ключ в нужное место
+    if (key < node->key)
+        node->left = insert(node->left, key);
+    else if (key > node->key)
+        node->right = insert(node->right, key);
+
+    //возвращаем указатель на (не)изменённое дерево
+    return node;
+}
+//функция для обхода дерева в порядке возрастания (in-order traversal)
+void inorderTraversal(TreeNode* root, int arr[], int& index)
+{
+    if (root != nullptr)
+    {
+        inorderTraversal(root->left, arr, index);
+        arr[index++] = root->key;
+        inorderTraversal(root->right, arr, index);
+    }
+}
+//основная функция сортировки деревом
+void TreeSort(int arr[], int size)
+{
+    TreeNode* root = nullptr;
+
+    //создаем дерево с элементами массива
+    for (int i = 0; i < size; i++)
+        root = insert(root, arr[i]);
+    
+    //обходим дерево и сохраняем отсортированные элементы в массив
+    int index = 0;
+    inorderTraversal(root, arr, index);
+}
+
 //генерация случайного массива
 void MassGen(int* arr, int size)
 {
@@ -426,6 +477,20 @@ int main()
         cout << " - сгенерированный массив\n";
 
         Comb(arr, size);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 10:
+        cout << "Сортировка деревом:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        TreeSort(arr, size); //
 
         for (int i = 0; i < size; i++)
             cout << arr[i] << " ";
