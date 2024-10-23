@@ -17,10 +17,9 @@ void Bubble(int arr[], int size)
         }
     }
     cout << endl;
+
     for (int i = 0; i < size; i++)
-    {
         cout << arr[i] << " ";
-    }
 }
 //сортировка выбором
 void Choice(int arr[], int size)
@@ -39,10 +38,9 @@ void Choice(int arr[], int size)
         }
     }
     cout << endl;
-    for (int i = 0; i < size; i++)
-    {
-        cout << arr[i] << " ";
-    }
+
+    for (int i = 0; i < size; i++)    
+        cout << arr[i] << " "; 
 }
 //сортировка вставками
 void Insert(int arr[], int size)
@@ -56,14 +54,32 @@ void Insert(int arr[], int size)
         arr[j + 1] = buff;
     }
     cout << endl;
+
     for (int i = 0; i < size; i++)
-    {
         cout << arr[i] << " ";
-    }
+    
 }
 //быстрая сортировка (сортировка Хоара)
-void Partition() {
+void Quick(int arr[], int left, int right) {
+    int i = left;
+    int j = right;
+    int pivot = arr[(left + right) / 2]; //делаем центральное значение опорным элементом
 
+    //делим массив на части
+    while (i <= j) {
+        while (arr[i] < pivot) i++;
+        while (arr[j] > pivot) j--;
+
+        if (i <= j) {
+            swap(arr[i], arr[j]);
+            i++;
+            j--;
+        }
+    }
+
+    //рекурсивные вызовы для обеих частей
+    if (left < j) Quick(arr, left, j);
+    if (i < right) Quick(arr, i, right);
 }
 //сортировка слиянием 
 void Merge() {
@@ -80,18 +96,14 @@ void Shell(){
 void MassGen(int* arr, int size)
 {
     for (int i = 0; i < size; i++)
-    {
         arr[i] = rand() % 101 - 50;
-    }
 
     for (int i = 0; i < size; i++)
     {
         for (int j = i + 1; j < size;)
         {
             if (arr[i] == arr[j])
-            {
                 arr[i] = rand() % 101 - 50;
-            }
             else(j++);
         }
         cout << arr[i] << " ";
@@ -139,6 +151,16 @@ int main()
 
     case 4: 
         cout << "Быстрая сортировка: " << endl;
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+        cout << endl;
+        Quick(arr, 0, size - 1);
+        cout << " - отсортированный массив\n";
+        for (int i = 0; i < size; i++)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
         break;
 
     }
