@@ -353,9 +353,9 @@ int main()
     int chose;
 
     cout << "Здравствуйте, выберите тип сортировки:\n";
-    cout << "1 - Пузырьковая, 2 - Выбором, 3 - Вставками\n";
-    cout << "4 - Быстрая, 5 - Слиянием, 6 - Кучей\n";
-    cout << "7 - Шелла, 8 - Шейкерная, 9 - Расчёской";
+    cout << "1 - Пузырьковая, 2 - Шейкерная, 3 - Расчёской\n";
+    cout << "4 - Выбором, 5 - Вставками, 6 - Шелла\n";
+    cout << "7 - Быстрая, 8 - Слиянием, 9 - Кучей, 10 - Деревом";
     cout << endl;
     cin >> chose;
     cout << endl;
@@ -379,84 +379,6 @@ int main()
         break;
 
     case 2:
-        cout << "Сортировка выбором:\n";
-
-        MassGen(arr, size);
-        cout << " - сгенерированный массив\n";
-
-        Choice(arr, size);
-        cout << " - отсортированный массив\n";
-
-        break;
-
-    case 3:
-        cout << "Сортировка вставками:\n";
-
-        MassGen(arr, size);
-        cout << " - сгенерированный массив\n";
-
-        Insert(arr, size);
-        cout << " - отсортированный массив\n";
-
-        break;
-
-    case 4: 
-        cout << "Быстрая сортировка:\n";
-
-        MassGen(arr, size);
-        cout << " - сгенерированный массив\n";
-
-        Quick(arr, 0, size - 1);
-
-        for (int i = 0; i < size; i++)
-            cout << arr[i] << " "; 
-        cout << " - отсортированный массив\n";
-
-        break;
-
-    case 5:
-        cout << "Сортировка слиянием:\n";
-
-        MassGen(arr, size);
-        cout << " - сгенерированный массив\n";
-       
-        MergeSort(arr, 0, size - 1);
-
-        for (int i = 0; i < size; i++)
-            cout << arr[i] << " ";
-        cout << " - отсортированный массив\n";
-
-        break;
-
-    case 6: 
-        cout << "Сортировка кучей:\n";
-
-        MassGen(arr, size);
-        cout << " - сгенерированный массив\n";
-
-        Heap(arr, size);
-
-        for (int i = 0; i < size; i++)
-            cout << arr[i] << " ";
-        cout << " - отсортированный массив\n";
-
-        break;
-
-    case 7:
-        cout << "Сортировка Шелла:\n";
-
-        MassGen(arr, size);
-        cout << " - сгенерированный массив\n";
-
-        Shell(arr, size);
-
-        for (int i = 0; i < size; i++)
-            cout << arr[i] << " ";
-        cout << " - отсортированный массив\n";
-
-        break;
-
-    case 8:
         cout << "Шейкерная сортировка:\n";
 
         MassGen(arr, size);
@@ -470,13 +392,91 @@ int main()
 
         break;
 
-    case 9:
+    case 3:
         cout << "Сортировка расческой:\n";
 
         MassGen(arr, size);
         cout << " - сгенерированный массив\n";
 
         Comb(arr, size);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 4: 
+        cout << "Сортировка выбором:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Choice(arr, size);
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 5:
+        cout << "Сортировка вставками:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Insert(arr, size);
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 6: 
+        cout << "Сортировка Шелла:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Shell(arr, size);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 7:
+        cout << "Быстрая сортировка:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Quick(arr, 0, size - 1);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 8:
+        cout << "Сортировка слиянием:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        MergeSort(arr, 0, size - 1);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 9:
+        cout << "Сортировка кучей:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Heap(arr, size);
 
         for (int i = 0; i < size; i++)
             cout << arr[i] << " ";
@@ -497,6 +497,8 @@ int main()
         cout << " - отсортированный массив\n";
 
         break;
-    }
-    
+
+    default:
+        cout << "Введите корректное значение!\n";
+    }  
 }
