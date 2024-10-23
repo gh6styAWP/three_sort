@@ -22,6 +22,43 @@ void Bubble(int arr[], int size)
     for (int i = 0; i < size; i++)
         cout << arr[i] << " ";
 }
+//шейкерная сортировка (улучшенная сортировка пузырьком)
+void Shaker(int arr[], int size) {
+    bool swapped = true;
+    int start = 0;
+    int end = size - 1;
+
+    while (swapped) {
+        swapped = false;
+        
+        //проход массива слева направо
+        for (int i = start; i < end; i++) {
+            if (arr[i] > arr[i + 1]) {
+                swap(arr[i], arr[i + 1]);
+                swapped = true;
+            }
+        }
+
+        if (!swapped)
+            break;
+
+        //уменьшаем конец
+        swapped = false;
+        end--;
+
+        //проход массива справа налево
+        for (int i = end - 1; i >= start; i--) {
+            if (arr[i] > arr[i + 1]) {
+                swap(arr[i], arr[i + 1]);
+                swapped = true;
+            }
+        }
+
+        //увеличиваем начало
+        start++;
+    }
+}
+//сортировка расческой (улучшенная сортировка пузырьком)
 //сортировка выбором
 void Choice(int arr[], int size)
 {
@@ -240,7 +277,7 @@ int main()
     cout << "Здравствуйте, выберите тип сортировки:\n";
     cout << "1 - Пузырьковая, 2 - Выбором, 3 - Вставками\n";
     cout << "4 - Быстрая, 5 - Слиянием, 6 - Кучей\n";
-    cout << "7 - Шелла";
+    cout << "7 - Шелла, 8 - Шейкерная";
     cout << endl;
     cin >> chose;
     cout << endl;
@@ -338,6 +375,25 @@ int main()
         for (int i = 0; i < size; i++)
             cout << arr[i] << " ";
         cout << " - отсортированный массив\n";
+
+        break;
+
+    case 8:
+        cout << "Шейкерная сортировка:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Shaker(arr, size);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
+
+        break;
+
+    case 9:
+
 
         break;
     }
