@@ -61,6 +61,25 @@ void Insert(int arr[], int size)
     for (int i = 0; i < size; i++)
         cout << arr[i] << " ";
 }
+//сортировка Шелла (улучшенная сортировка вставками)
+void Shell(int arr[], int size)
+{
+    //начинаем с большого шага и постепенно уменьшаем его
+    for (int gap = size / 2; gap > 0; gap /= 2)
+    {
+        //сортировка вставками для текущего шага
+        for (int i = gap; i < size; i++)
+        {
+            int temp = arr[i];
+            int j;
+
+            //перемещаем элементы, которые находятся на расстоянии gap, и больше текущего элемента
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+                arr[j] = arr[j - gap];            
+            arr[j] = temp;
+        }
+    }
+}
 //быстрая сортировка (сортировка Хоара)
 void Quick(int arr[], int left, int right) {
     int i = left;
@@ -221,6 +240,7 @@ int main()
     cout << "Здравствуйте, выберите тип сортировки:\n";
     cout << "1 - Пузырьковая, 2 - Выбором, 3 - Вставками\n";
     cout << "4 - Быстрая, 5 - Слиянием, 6 - Кучей\n";
+    cout << "7 - Шелла";
     cout << endl;
     cin >> chose;
     cout << endl;
@@ -304,8 +324,22 @@ int main()
         for (int i = 0; i < size; i++)
             cout << arr[i] << " ";
         cout << " - отсортированный массив\n";
+
+        break;
+
+    case 7:
+        cout << "Сортировка Шелла:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Shell(arr, size);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
+
+        break;
     }
     
-
-
 }
