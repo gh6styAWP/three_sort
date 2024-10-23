@@ -147,9 +147,48 @@ void MergeSort(int arr[], int left, int right) {
         Merge(arr, left, mid, right);
     }
 }
-//сортировка кучей (пирамидальная)
-void Heap() {
+//вспомогательная функция для построения кучи
+void Heapify(int arr[], int size, int root) {
+    //изначально корень считаем наибольшим элементом
+    int largest = root;
 
+    //левый дочерний элемент
+    int left = 2 * root + 1;
+
+    //правый дочерний элемент
+    int right = 2 * root + 2;
+
+    //если левый дочерний элемент больше корня
+    if (left < size && arr[left] > arr[largest])
+        largest = left;
+
+    //если правый дочерний элемент больше текущего наибольшего элемента
+    if (right < size && arr[right] > arr[largest])
+        largest = right;
+
+    //если наибольший элемент не корень
+    if (largest != root) {
+        swap(arr[root], arr[largest]);
+
+        //рекурсивно преобразуем затронутое поддерево
+        Heapify(arr, size, largest);
+    }
+}
+//сортировка кучей (пирамидальная)
+void Heap(int arr[], int size) {
+    //построение кучи
+    for (int i = size / 2 - 1; i >= 0; i--)
+        Heapify(arr, size, i);
+
+    //один за другим извлекаются элементы из кучи
+    for (int i = size - 1; i > 0; i--) {
+
+        //корень перемещается в конец
+        swap(arr[0], arr[i]);
+
+        //вызывается heapify на уменьшенной куче
+        Heapify(arr, i, 0);
+    }
 }
 //сортировка Шелла (улучшенная сортировка вставками)
 void Shell(){
@@ -181,12 +220,15 @@ int main()
 
     cout << "Здравствуйте, выберите тип сортировки:\n";
     cout << "1 - Пузырьковая, 2 - Выбором, 3 - Вставками\n";
-    cout << "4 - Быстрая, 5 - Слиянием";
+    cout << "4 - Быстрая, 5 - Слиянием, 6 - Кучей\n";
+    cout << endl;
     cin >> chose;
+    cout << endl;
 
     cout << "Введите размер массива" << endl;
     cin >> size;
     int* arr = new int[size];
+    cout << endl;
 
     switch (chose)
     {
@@ -230,11 +272,10 @@ int main()
         cout << " - сгенерированный массив\n";
 
         Quick(arr, 0, size - 1);
-        cout << " - отсортированный массив\n";
 
         for (int i = 0; i < size; i++)
             cout << arr[i] << " "; 
-        cout << endl;
+        cout << " - отсортированный массив\n";
 
         break;
 
@@ -245,13 +286,24 @@ int main()
         cout << " - сгенерированный массив\n";
        
         MergeSort(arr, 0, size - 1);
-        cout << " - отсортированный массив\n";
 
         for (int i = 0; i < size; i++)
             cout << arr[i] << " ";
-        cout << endl;
+        cout << " - отсортированный массив\n";
 
         break;
+
+    case 6: 
+        cout << "Сортировка кучей:\n";
+
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Heap(arr, size);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
     }
     
 
