@@ -59,6 +59,31 @@ void Shaker(int arr[], int size) {
     }
 }
 //сортировка расческой (улучшенная сортировка пузырьком)
+void Comb(int arr[], int size) {
+    //изначальный шаг выбирается как размер массива
+    int gap = size;
+    bool swapped = true;
+
+    //постепенное уменьшение шага до 1
+    while (gap != 1 || swapped) {
+
+        //вычисление нового шага
+        gap = (gap * 10) / 13;
+        if (gap < 1)
+            gap = 1;
+
+        swapped = false;
+
+        //сравнение элементов на расстоянии gap друг от друга
+        for (int i = 0; i < size - gap; i++) {
+            if (arr[i] > arr[i + gap]) {
+                swap(arr[i], arr[i + gap]);
+                swapped = true;
+            }
+        }
+    }
+}
+
 //сортировка выбором
 void Choice(int arr[], int size)
 {
@@ -81,6 +106,7 @@ void Choice(int arr[], int size)
     for (int i = 0; i < size; i++)    
         cout << arr[i] << " "; 
 }
+
 //сортировка вставками
 void Insert(int arr[], int size)
 {
@@ -117,6 +143,7 @@ void Shell(int arr[], int size)
         }
     }
 }
+
 //быстрая сортировка (сортировка Хоара)
 void Quick(int arr[], int left, int right) {
     int i = left;
@@ -140,6 +167,7 @@ void Quick(int arr[], int left, int right) {
     if (i < right) Quick(arr, i, right);
 
 }
+
 //функция слияния двух отсортированных массивов 
 void Merge(int arr[], int left, int mid, int right) {
     int n1 = mid - left + 1;
@@ -203,6 +231,7 @@ void MergeSort(int arr[], int left, int right) {
         Merge(arr, left, mid, right);
     }
 }
+
 //вспомогательная функция для построения кучи
 void Heapify(int arr[], int size, int root) {
     //изначально корень считаем наибольшим элементом
@@ -246,9 +275,7 @@ void Heap(int arr[], int size) {
         Heapify(arr, i, 0);
     }
 }
-//сортировка Шелла (улучшенная сортировка вставками)
-void Shell(){
-}
+
 //генерация случайного массива
 void MassGen(int* arr, int size)
 {
@@ -277,7 +304,7 @@ int main()
     cout << "Здравствуйте, выберите тип сортировки:\n";
     cout << "1 - Пузырьковая, 2 - Выбором, 3 - Вставками\n";
     cout << "4 - Быстрая, 5 - Слиянием, 6 - Кучей\n";
-    cout << "7 - Шелла, 8 - Шейкерная";
+    cout << "7 - Шелла, 8 - Шейкерная, 9 - Расчёской";
     cout << endl;
     cin >> chose;
     cout << endl;
@@ -393,7 +420,16 @@ int main()
         break;
 
     case 9:
+        cout << "Сортировка расческой:\n";
 
+        MassGen(arr, size);
+        cout << " - сгенерированный массив\n";
+
+        Comb(arr, size);
+
+        for (int i = 0; i < size; i++)
+            cout << arr[i] << " ";
+        cout << " - отсортированный массив\n";
 
         break;
     }
